@@ -27,9 +27,10 @@ const headers = [
 ]
 let toHash = {
     string: '',
-    algorithm: ''
+    algorithm: 'md5'
 }
-let hashDatas = ref([])
+const hashDatas = ref([])
+const errorOccurred = ref(false)
 
 async function getHash() {
     try {
@@ -45,7 +46,7 @@ async function getHash() {
             title: "The hash for the string " + toHash.string + " with the algorithm " + option.value + " is:",
             description: response.data.hash
           }
-
+          errorOccurred.value = false
           hashDatas.value.unshift(newHashData)
         }
       }
@@ -56,9 +57,11 @@ async function getHash() {
         title: "The hash for the string " + toHash.string + " with the algorithm " + toHash.algorithm + " is :",
         description: response.data.hash
       }
+      errorOccurred.value = false
       hashDatas.value.unshift(newHashData)
     }
   } catch (error) {
+    errorOccurred.value = true
     console.error('Error:', error)
   }
 }
@@ -89,5 +92,13 @@ async function getHash() {
     label="Generate the hash"
     @click="getHash"
   />
-  <DsfrTiles :tiles="hashDatas" :horizontal="true" />
+  <DsfrTiles v-if="!errorOccurred" :tiles="hashDatas" :horizontal="true" />
+  <DsfrAlert
+    v-if="errorOccurred"
+    title="Error"
+    description="An error occured. Please try again later"
+    type="error"
+    :small="small"
+    :closeable="false"
+  />
 </template>
