@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/AppHome.vue'
 import List from '../views/AppList.vue'
+import Register from '../views/AppRegister.vue'
 
 const MAIN_TITLE = 'Entretien Dev Front End'
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/list',
     name: 'List',
     component: List,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
 ]
 

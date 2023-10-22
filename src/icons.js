@@ -6,4 +6,5 @@ export {
   RiRefreshLine,
   RiQuestionMark,
   RiFilePdfLine,
+  RiAccountCircleLine,
 } from 'oh-vue-icons/icons/ri/index.js'

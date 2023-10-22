@@ -19,6 +19,12 @@ const quickLinks = [
     to: '/list',
     icon: 'ri-file-pdf-line',
     iconAttrs: { color: 'var(--red-marianne-425-625)' },
+  },
+  {
+    label: 'Register',
+    to: '/register',
+    icon: 'ri-account-circle-line',
+    iconAttrs: { color: 'var(--red-marianne-425-625)' },
   }
 ]
 

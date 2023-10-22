@@ -53,7 +53,7 @@ async function getHash() {
       const response = await axios.post('http://localhost:8000/api/hash', toHash)
 
       const newHashData = {
-        title: "The hash for the string " + toHash.string + " with the algorithm " + toHash.algorithm + " is:",
+        title: "The hash for the string " + toHash.string + " with the algorithm " + toHash.algorithm + " is :",
         description: response.data.hash
       }
       hashDatas.value.unshift(newHashData)
@@ -61,7 +61,6 @@ async function getHash() {
   } catch (error) {
     console.error('Error:', error)
   }
-
 }
 </script>
 
