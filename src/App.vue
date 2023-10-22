@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import ReloadPrompt from '@/components/ReloadPrompt.vue'
@@ -14,9 +13,14 @@ const quickLinks = [
     to: '/',
     icon: 'ri-home-4-line',
     iconAttrs: { color: 'var(--red-marianne-425-625)' },
+  },
+  {
+    label: 'List',
+    to: '/list',
+    icon: 'ri-file-pdf-line',
+    iconAttrs: { color: 'var(--red-marianne-425-625)' },
   }
 ]
-const searchQuery = ref('')
 
 const {
   offlineReady,
@@ -32,12 +36,10 @@ const close = () => {
 
 <template>
   <DsfrHeader
-    v-model="searchQuery"
     :service-title="serviceTitle"
     :service-description="serviceDescription"
     :logo-text="logoText"
     :quick-links="quickLinks"
-    show-search
   />
 
   <div class="fr-container  fr-mt-3w  fr-mt-md-5w  fr-mb-5w">

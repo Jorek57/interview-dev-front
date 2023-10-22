@@ -1,14 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/AppHome.vue'
+import List from '../views/AppList.vue'
 
-const MAIN_TITLE = 'Gabarit de démarrage VueDsfr'
+const MAIN_TITLE = 'Entretien Dev Front End'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: List,
   },
 ]
 
