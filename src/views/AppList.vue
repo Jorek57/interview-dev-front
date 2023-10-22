@@ -14,6 +14,10 @@ const options = [
     {
         label: "SHA256",
         value: "sha256"
+    },
+    {
+        label: "All of them",
+        value: "all"
     }
 ]
 const headers = [
@@ -25,25 +29,39 @@ let toHash = {
     string: '',
     algorithm: ''
 }
-let hashDatas = ref([]); // Initialize as an empty array
+let hashDatas = ref([])
 
 async function getHash() {
-  try {
-    const response = await axios.post('http://localhost:8000/api/hash', toHash);
+    try {
+    if (toHash.algorithm === 'all') {
+      for (const option of options) {
+        if (option.value !== 'all') {
+          const response = await axios.post('http://localhost:8000/api/hash', {
+            string: toHash.string,
+            algorithm: option.value,
+          })
 
-    // Create a new object to represent the hash data
-    const newHashData = {
-      title: "The hash for the string " + toHash.string + " with the algorithm " + toHash.algorithm + " is:",
-      description: response.data.hash
-    };
+          const newHashData = {
+            title: "The hash for the string " + toHash.string + " with the algorithm " + option.value + " is:",
+            description: response.data.hash
+          }
 
-    // Push the new hash data object to the hashDatas array
-    hashDatas.value.unshift(newHashData);
+          hashDatas.value.unshift(newHashData)
+        }
+      }
+    } else {
+      const response = await axios.post('http://localhost:8000/api/hash', toHash)
 
-    console.log(hashDatas.value);
+      const newHashData = {
+        title: "The hash for the string " + toHash.string + " with the algorithm " + toHash.algorithm + " is:",
+        description: response.data.hash
+      }
+      hashDatas.value.unshift(newHashData)
+    }
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error:', error)
   }
+
 }
 </script>
 
